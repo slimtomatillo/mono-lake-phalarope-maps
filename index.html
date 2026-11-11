@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mono Lake Phalarope Surveys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<link rel="stylesheet" href="style.css" />
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<header>
+  <h1 id="pageTitle">Mono Lake Phalarope Surveys</h1>
+  <p id="dateLabel" class="date-label">&nbsp;</p>
+</header>
+
+<div id="map"></div>
+
+<div id="legend" class="panel">
+  <div class="legend-section">
+    <div class="legend-title">Survey Type</div>
+    <div class="legend-row"><span class="swatch" id="boatSwatch"></span> Boat</div>
+    <div class="legend-row"><span class="swatch" id="shoreSwatch"></span> Shore</div>
+  </div>
+  <div class="legend-section">
+    <div class="legend-title">Count</div>
+    <div id="sizeLegend" class="size-legend"></div>
+  </div>
+  <div class="legend-section portrait-section">
+    <div id="speciesPortrait" class="species-portrait"></div>
+  </div>
+</div>
+
+<div id="controls" class="panel">
+  <button id="playBtn" aria-label="Play">&#9654;</button>
+  <input id="scrubber" type="range" min="0" max="0" value="0" step="1" />
+  <select id="speciesSelect">
+    <option value="total">Total Phalaropes</option>
+    <option value="WIPH">Wilson's Phalaropes</option>
+    <option value="RNPH">Red-necked Phalaropes</option>
+  </select>
+  <label class="speed-label">
+    <input id="showZeroToggle" type="checkbox" />
+    Show 0 counts
+  </label>
+  <label class="speed-label">
+    Speed
+    <select id="speedSelect">
+      <option value="2000">0.5x</option>
+      <option value="1000" selected>1x</option>
+      <option value="500">2x</option>
+      <option value="250">4x</option>
+    </select>
+  </label>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

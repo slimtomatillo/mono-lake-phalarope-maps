@@ -1,0 +1,231 @@
+:root {
+  color-scheme: light;
+  --ink: #1f2a30;
+  --paper: #ffffff;
+  --line: #d8dee2;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 12px 16px 8px;
+  pointer-events: none;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 400;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Same size as the title, bold -- matches the GIFs' title/date. */
+.date-label {
+  margin: 2px 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-shadow: 0 1px 3px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.6);
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+}
+
+.panel {
+  position: absolute;
+  z-index: 2;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  backdrop-filter: blur(4px);
+}
+
+#legend {
+  top: 64px;
+  right: 16px;
+  padding: 10px 14px;
+  min-width: 140px;
+}
+
+.legend-section + .legend-section {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.legend-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #667;
+  margin-bottom: 4px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.4);
+  display: inline-block;
+}
+
+/* Count legend: one row per range -- true-size hollow circle, then label --
+   matching the static maps' Count legend. */
+.size-legend {
+  display: flex;
+  flex-direction: column;
+}
+
+.size-legend .size-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #445;
+}
+
+.size-legend .size-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.size-legend .bubble {
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: transparent;
+}
+
+.size-legend .zero-marker {
+  font-size: 0.85rem;
+  color: dimgray;
+}
+
+/* Species portrait(s) below the Count legend; two (total) share the
+   width side by side. */
+.species-portrait {
+  display: flex;
+  gap: 6px;
+  /* Take the width the legends already set, rather than widening the panel
+     to the images' natural size. */
+  width: 0;
+  min-width: 100%;
+}
+
+.species-portrait img {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+  /* Crop proportions (900 x 650, animated_maps.ILLUSTRATION_CROPS): reserves
+     the image's space before it loads, so the panel doesn't jump. */
+  aspect-ratio: 900 / 650;
+  border: 1px solid #888;
+  display: block;
+}
+
+/* Lift MapLibre's bottom controls (scale bars, north arrow) above the
+   playback bar. */
+.maplibregl-ctrl-bottom-right {
+  bottom: 72px;
+}
+
+.maplibregl-ctrl-top-left {
+  top: 56px;
+}
+
+.north-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 6px;
+  pointer-events: none;
+}
+
+.north-arrow .north-n {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+#controls {
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+}
+
+#playBtn {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#playBtn:hover { opacity: 0.85; }
+
+#scrubber {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#speciesSelect, #speedSelect {
+  flex: 0 0 auto;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: white;
+  font-size: 0.85rem;
+}
+
+.speed-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #556;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 640px) {
+  #legend { display: none; }
+  #controls { flex-wrap: wrap; }
+}
